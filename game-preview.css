@@ -1,18 +1,10 @@
-/* Game thumbnail: use the live Lovable preview as a visual cover instead of a tall player. */
+/* Static thumbnail matching the user-provided opening screen. */
 .games-list { grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); }
 .game-card { display: flex; flex-direction: column; }
-.game-card iframe {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9;
-  min-height: 0;
-  max-height: 300px;
-  border-radius: 14px;
-  background: linear-gradient(135deg, #f1f0ff, #f7fbff);
-}
+.game-preview-link { position: relative; display: block; overflow: hidden; aspect-ratio: 765 / 184; border: 1px solid var(--line); border-radius: 14px; background: #d7d7d7; }
+.game-preview-image { display: block; width: 100%; height: 100%; object-fit: cover; }
+.game-preview-play { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(23, 24, 38, 0); color: #fff; font-size: 15px; font-weight: 700; opacity: 0; transition: background .2s ease, opacity .2s ease; }
+.game-preview-link:hover .game-preview-play, .game-preview-link:focus-visible .game-preview-play { background: rgba(23, 24, 38, .3); opacity: 1; }
 .game-heading { min-height: 38px; }
 .game-open-link { margin-top: 12px; }
-@media (max-width: 760px) {
-  .games-list { grid-template-columns: minmax(0, 1fr); }
-  .game-card iframe { max-height: 260px; }
-}
+@media (max-width: 760px) { .games-list { grid-template-columns: minmax(0, 1fr); } }
