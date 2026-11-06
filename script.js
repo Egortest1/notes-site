@@ -1,5 +1,6 @@
 const USERS_KEY = 'noteFlow.demoUsers.v1';
 const SESSION_KEY = 'noteFlow.demoSession.v1';
+const LOVABLE_GAME_URL = 'https://lovable.dev/preview/Hgh5eKFZwTwWUcO2JuRNE6AsY0wwPxXq';
 const DEFAULT_NOTES = [
   { id: crypto.randomUUID(), title: 'План на неделю', content: 'Подготовить презентацию, проверить текущие задачи и записать идеи для нового проекта.', category: 'work', pinned: true, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
   { id: crypto.randomUUID(), title: 'Идея для отдыха', content: 'Сходить в парк, купить кофе и понаблюдать за закатом.', category: 'personal', pinned: false, createdAt: new Date(Date.now() - 86400000).toISOString(), updatedAt: new Date(Date.now() - 86400000).toISOString() },
@@ -93,6 +94,11 @@ function loadUserData() {
   state.notes = Array.isArray(notes) ? notes : structuredClone(DEFAULT_NOTES);
   state.games = readJSON(userKey('games'), []);
   if (!notes) saveNotes();
+  // Ensure the supplied published preview is available in every account.
+  if (!state.games.some((game) => game.url === LOVABLE_GAME_URL)) {
+    state.games.unshift({ id: 'lovable-preview-hgh5ekf', title: 'Моя мини-игра', url: LOVABLE_GAME_URL });
+    saveGames();
+  }
 }
 function saveNotes() { localStorage.setItem(userKey('notes'), JSON.stringify(state.notes)); }
 function saveGames() { localStorage.setItem(userKey('games'), JSON.stringify(state.games)); }
@@ -188,7 +194,7 @@ function renderGames() {
     fallback.target = '_blank';
     fallback.rel = 'noopener noreferrer';
     fallback.className = 'game-open-link';
-    fallback.textContent = 'Если игра не отображается, открыть в новой вкладке ↗';
+    fallback.textContent = 'Если игра не отображается, открыть preview в новой вкладке ↗';
     card.append(heading, frame, fallback);
     els.gamesList.appendChild(card);
   });
