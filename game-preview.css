@@ -1,0 +1,18 @@
+/* Game thumbnail: use the live Lovable preview as a visual cover instead of a tall player. */
+.games-list { grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); }
+.game-card { display: flex; flex-direction: column; }
+.game-card iframe {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  min-height: 0;
+  max-height: 300px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #f1f0ff, #f7fbff);
+}
+.game-heading { min-height: 38px; }
+.game-open-link { margin-top: 12px; }
+@media (max-width: 760px) {
+  .games-list { grid-template-columns: minmax(0, 1fr); }
+  .game-card iframe { max-height: 260px; }
+}
