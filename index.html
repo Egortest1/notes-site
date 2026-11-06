@@ -3,175 +3,95 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Заметки</title>
+    <title>NoteFlow — заметки и игры</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="app-shell">
+    <div class="app-shell" id="app-shell" hidden>
       <aside class="sidebar">
-        <div class="brand-wrap">
-          <div class="brand-icon">N</div>
-          <div>
-            <p class="eyebrow">Личный кабинет</p>
-            <h1>NoteFlow</h1>
-          </div>
-        </div>
-
-        <button class="primary-btn" id="new-note-btn">
-          <span>＋</span>
-          Новая заметка
-        </button>
-
+        <div class="brand-wrap"><div class="brand-icon">N</div><div><p class="eyebrow">Личный кабинет</p><h1>NoteFlow</h1></div></div>
+        <button class="primary-btn" id="new-note-btn"><span>＋</span> Новая заметка</button>
         <nav class="sidebar-nav" aria-label="Секции">
           <div class="nav-section-title">Навигация</div>
-          <button class="nav-item active" data-filter="all">
-            <span class="nav-icon">☰</span>
-            Все заметки
-            <span class="count" id="count-all">0</span>
-          </button>
-          <button class="nav-item" data-filter="pinned">
-            <span class="nav-icon">📌</span>
-            Избранное
-            <span class="count" id="count-pinned">0</span>
-          </button>
-          <button class="nav-item" data-filter="work">
-            <span class="nav-icon">💼</span>
-            Работа
-            <span class="count" id="count-work">0</span>
-          </button>
-          <button class="nav-item" data-filter="personal">
-            <span class="nav-icon">🧠</span>
-            Личное
-            <span class="count" id="count-personal">0</span>
-          </button>
-          <button class="nav-item" data-filter="ideas">
-            <span class="nav-icon">✨</span>
-            Идеи
-            <span class="count" id="count-ideas">0</span>
-          </button>
+          <button class="nav-item active" data-view="notes" data-filter="all"><span class="nav-icon">☰</span>Все заметки<span class="count" id="count-all">0</span></button>
+          <button class="nav-item" data-view="notes" data-filter="pinned"><span class="nav-icon">📌</span>Избранное<span class="count" id="count-pinned">0</span></button>
+          <button class="nav-item" data-view="notes" data-filter="work"><span class="nav-icon">💼</span>Работа<span class="count" id="count-work">0</span></button>
+          <button class="nav-item" data-view="notes" data-filter="personal"><span class="nav-icon">🧠</span>Личное<span class="count" id="count-personal">0</span></button>
+          <button class="nav-item" data-view="notes" data-filter="ideas"><span class="nav-icon">✨</span>Идеи<span class="count" id="count-ideas">0</span></button>
+          <div class="nav-section-title nav-spaced">Развлечения</div>
+          <button class="nav-item" data-view="games" data-filter="games"><span class="nav-icon">🎮</span>Мои мини-игры<span class="count" id="game-count">0</span></button>
         </nav>
-
-        <div class="mini-card">
-          <p class="mini-label">Сегодня</p>
-          <h3 id="today-count">0 заметок</h3>
-          <span>Успешный день</span>
-        </div>
+        <div class="mini-card"><p class="mini-label">Сегодня</p><h3 id="today-count">0 заметок</h3><span>Успешный день</span></div>
       </aside>
 
       <main class="content-area">
         <header class="topbar">
-          <div>
-            <p class="eyebrow">Планируйте мысли</p>
-            <h2>Заметки</h2>
+          <div><p class="eyebrow">Планируйте мысли</p><h2 id="page-title">Заметки</h2></div>
+          <div class="topbar-right">
+            <label class="search-box" id="search-wrap" aria-label="Поиск заметок"><span>⌕</span><input id="search-input" type="search" placeholder="Поиск заметок..." /></label>
+            <div class="account-chip"><span class="avatar" id="user-avatar">U</span><span id="user-label">Пользователь</span><button class="ghost-btn logout-btn" id="logout-btn" type="button">Выйти</button></div>
           </div>
-
-          <label class="search-box" aria-label="Поиск заметок">
-            <span>⌕</span>
-            <input id="search-input" type="search" placeholder="Поиск заметок..." />
-          </label>
         </header>
 
-        <section class="stats-row" aria-label="Статистика заметок">
-          <div class="stat-box">
-            <span class="stat-title">Всего</span>
-            <strong id="stat-total">0</strong>
-          </div>
-          <div class="stat-box accent">
-            <span class="stat-title">За неделю</span>
-            <strong id="stat-week">0</strong>
-          </div>
-          <div class="stat-box">
-            <span class="stat-title">Закреплено</span>
-            <strong id="stat-pinned">0</strong>
-          </div>
+        <section id="notes-view">
+          <section class="stats-row" aria-label="Статистика заметок">
+            <div class="stat-box"><span class="stat-title">Всего</span><strong id="stat-total">0</strong></div>
+            <div class="stat-box accent"><span class="stat-title">За неделю</span><strong id="stat-week">0</strong></div>
+            <div class="stat-box"><span class="stat-title">Закреплено</span><strong id="stat-pinned">0</strong></div>
+          </section>
+          <section class="notes-panel">
+            <div class="panel-header"><div><p class="eyebrow">Список</p><h3 id="current-section-title">Все заметки</h3></div><button class="ghost-btn" id="sort-btn" type="button">Сначала новые</button></div>
+            <div class="notes-grid" id="notes-grid"></div>
+          </section>
         </section>
 
-        <section class="notes-panel">
-          <div class="panel-header">
-            <div>
-              <p class="eyebrow">Список</p>
-              <h3 id="current-section-title">Все заметки</h3>
-            </div>
-            <button class="ghost-btn" id="sort-btn" type="button">Сначала новые</button>
-          </div>
-
-          <div class="notes-grid" id="notes-grid"></div>
+        <section class="notes-panel games-view" id="games-view" hidden>
+          <div class="panel-header"><div><p class="eyebrow">Развлечения</p><h3>Мои мини-игры</h3></div></div>
+          <form id="game-form" class="game-form">
+            <label class="field"><span>Название игры</span><input id="game-title" maxlength="60" placeholder="Например: Космический раннер" required /></label>
+            <label class="field"><span>Ссылка на игру</span><input id="game-url" type="url" placeholder="https://example.com/my-game" required /></label>
+            <button class="primary-btn" type="submit">＋ Добавить игру</button>
+          </form>
+          <p class="helper-text">Добавьте публичную ссылку с https://. Некоторые сайты запрещают встраивание — тогда игру можно будет открыть в новой вкладке.</p>
+          <div id="games-list" class="games-list"></div>
         </section>
       </main>
     </div>
 
+    <section class="auth-screen" id="auth-screen">
+      <div class="auth-card">
+        <div class="brand-wrap auth-brand"><div class="brand-icon">N</div><div><p class="eyebrow">Заметки и игры</p><h1>NoteFlow</h1></div></div>
+        <h2 id="auth-heading">С возвращением</h2>
+        <p class="auth-copy">Войдите, чтобы открыть свои заметки и мини-игры.</p>
+        <div class="auth-tabs"><button class="auth-tab active" id="login-tab" type="button">Вход</button><button class="auth-tab" id="register-tab" type="button">Регистрация</button></div>
+        <form id="auth-form">
+          <label class="field"><span>Email</span><input id="auth-email" type="email" autocomplete="email" placeholder="you@example.com" required /></label>
+          <label class="field"><span>Пароль</span><input id="auth-password" type="password" autocomplete="current-password" minlength="8" placeholder="Не менее 8 символов" required /></label>
+          <p class="auth-error" id="auth-error" role="alert"></p>
+          <button class="primary-btn auth-submit" id="auth-submit" type="submit">Войти</button>
+        </form>
+        <p class="helper-text auth-notice">Демо-авторизация хранит аккаунт только в этом браузере. Для настоящего защищённого входа и синхронизации нужен сервер или сервис авторизации.</p>
+      </div>
+    </section>
+
     <div class="modal hidden" id="note-modal" aria-hidden="true">
       <div class="modal-backdrop" data-close="true"></div>
       <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-        <div class="modal-header">
-          <div>
-            <p class="eyebrow">Редактор</p>
-            <h3 id="modal-title">Новая заметка</h3>
-          </div>
-          <button class="icon-btn" id="close-modal-btn" aria-label="Закрыть">✕</button>
-        </div>
-
+        <div class="modal-header"><div><p class="eyebrow">Редактор</p><h3 id="modal-title">Новая заметка</h3></div><button class="icon-btn" id="close-modal-btn" aria-label="Закрыть">✕</button></div>
         <form id="note-form">
           <input type="hidden" id="note-id" />
-
-          <label class="field">
-            <span>Заголовок</span>
-            <input id="note-title" type="text" maxlength="80" placeholder="Например: План на неделю" required />
-          </label>
-
-          <label class="field">
-            <span>Категория</span>
-            <select id="note-category">
-              <option value="work">Работа</option>
-              <option value="personal">Личное</option>
-              <option value="ideas">Идеи</option>
-              <option value="general">Общее</option>
-            </select>
-          </label>
-
-          <label class="field">
-            <span>Текст заметки</span>
-            <textarea id="note-content" rows="8" maxlength="1000" placeholder="Что вы хотите запомнить?" required></textarea>
-          </label>
-
-          <div class="modal-actions">
-            <label class="checkbox-wrap">
-              <input id="note-pinned" type="checkbox" />
-              <span>Закрепить</span>
-            </label>
-
-            <div class="action-buttons">
-              <button class="ghost-btn" type="button" id="cancel-btn">Отмена</button>
-              <button class="primary-btn" type="submit">Сохранить</button>
-            </div>
-          </div>
+          <label class="field"><span>Заголовок</span><input id="note-title" type="text" maxlength="80" placeholder="Например: План на неделю" required /></label>
+          <label class="field"><span>Категория</span><select id="note-category"><option value="work">Работа</option><option value="personal">Личное</option><option value="ideas">Идеи</option><option value="general">Общее</option></select></label>
+          <label class="field"><span>Текст заметки</span><textarea id="note-content" rows="8" maxlength="1000" placeholder="Что вы хотите запомнить?" required></textarea></label>
+          <div class="modal-actions"><label class="checkbox-wrap"><input id="note-pinned" type="checkbox" /><span>Закрепить</span></label><div class="action-buttons"><button class="ghost-btn" type="button" id="cancel-btn">Отмена</button><button class="primary-btn" type="submit">Сохранить</button></div></div>
         </form>
       </div>
     </div>
 
-    <template id="note-card-template">
-      <article class="note-card">
-        <div class="note-topline">
-          <span class="note-tag"></span>
-          <button class="tiny-btn pin-btn" aria-label="Закрепить заметку">📌</button>
-        </div>
-
-        <h4 class="note-title"></h4>
-        <p class="note-preview"></p>
-
-        <div class="note-footer">
-          <span class="note-date"></span>
-          <div class="note-actions">
-            <button class="tiny-btn edit-btn" aria-label="Редактировать">✎</button>
-            <button class="tiny-btn delete-btn" aria-label="Удалить">🗑</button>
-          </div>
-        </div>
-      </article>
-    </template>
-
+    <template id="note-card-template"><article class="note-card"><div class="note-topline"><span class="note-tag"></span><button class="tiny-btn pin-btn" aria-label="Закрепить заметку">📌</button></div><h4 class="note-title"></h4><p class="note-preview"></p><div class="note-footer"><span class="note-date"></span><div class="note-actions"><button class="tiny-btn edit-btn" aria-label="Редактировать">✎</button><button class="tiny-btn delete-btn" aria-label="Удалить">🗑</button></div></div></article></template>
     <script src="script.js"></script>
   </body>
 </html>
