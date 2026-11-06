@@ -4,18 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#f5f7ff" />
-  <title>txtNote by Barsik — заметки и мини-игры</title>
+  <title>Note by Barsik — заметки и мини-игры</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=6" />
-  <link rel="stylesheet" href="game-preview.css?v=3" />
-  <link rel="stylesheet" href="branding.css?v=1" />
+  <link rel="stylesheet" href="styles.css?v=7" />
+  <link rel="stylesheet" href="game-preview.css?v=4" />
+  <link rel="stylesheet" href="branding.css?v=2" />
 </head>
 <body>
   <div class="app-shell" id="app-shell" hidden>
     <aside class="sidebar">
-      <a class="brand-wrap" href="#" aria-label="txtNote by Barsik — главная"><span class="brand-icon" aria-hidden="true"></span><span><span class="eyebrow">Личный кабинет</span><strong class="brand-name">txtNote by Barsik</strong></span></a>
+      <a class="brand-wrap" href="#" aria-label="Note by Barsik"><span class="brand-icon" aria-hidden="true"></span><span><span class="eyebrow">Личный кабинет</span><strong class="brand-name">Note by Barsik</strong></span></a>
       <button class="primary-btn new-note-btn" id="new-note-btn" type="button"><span aria-hidden="true">＋</span> Новая заметка</button>
       <nav class="sidebar-nav" aria-label="Навигация">
         <p class="nav-section-title">Заметки</p>
@@ -39,26 +39,53 @@
         </div>
       </header>
       <section id="notes-view">
-        <div class="stats-row" aria-label="Статистика заметок"><div class="stat-box"><span class="stat-title">Всего заметок</span><strong id="stat-total">0</strong></div><div class="stat-box accent"><span class="stat-title">Обновлено за неделю</span><strong id="stat-week">0</strong></div><div class="stat-box"><span class="stat-title">В избранном</span><strong id="stat-pinned">0</strong></div></div>
+        <div class="stats-row" aria-label="Статистика заметок">
+          <div class="stat-box"><span class="stat-title">Всего заметок</span><strong id="stat-total">0</strong></div>
+          <div class="stat-box accent"><span class="stat-title">Обновлено за неделю</span><strong id="stat-week">0</strong></div>
+          <div class="stat-box"><span class="stat-title">В избранном</span><strong id="stat-pinned">0</strong></div>
+        </div>
         <section class="notes-panel"><div class="panel-header"><div><p class="eyebrow">Ваша коллекция</p><h2 id="current-section-title">Все заметки</h2></div><button class="ghost-btn" id="sort-btn" type="button">Сначала новые</button></div><div class="notes-grid" id="notes-grid" aria-live="polite"></div></section>
       </section>
       <section class="notes-panel games-view" id="games-view" hidden>
         <div class="panel-header"><div><p class="eyebrow">Развлечения</p><h2>Мои мини-игры</h2></div></div>
-        <form id="game-form" class="game-form"><label class="field"><span>Название игры</span><input id="game-title" maxlength="60" placeholder="Например: Космический раннер" required /></label><label class="field"><span>Ссылка на игру</span><input id="game-url" type="url" inputmode="url" placeholder="https://example.com/my-game" required /></label><button class="primary-btn" type="submit">＋ Добавить игру</button></form>
-        <p class="helper-text">Добавьте публичную ссылку. Если сайт запрещает встраивание, игру можно открыть в новой вкладке.</p><div id="games-list" class="games-list"></div>
+        <form id="game-form" class="game-form">
+          <label class="field"><span>Название игры</span><input id="game-title" maxlength="60" placeholder="Например: Космический раннер" required /></label>
+          <label class="field"><span>Ссылка на игру</span><input id="game-url" type="url" inputmode="url" placeholder="https://example.com/my-game" required /></label>
+          <button class="primary-btn" type="submit">＋ Добавить игру</button>
+        </form>
+        <p class="helper-text">Добавьте публичную ссылку. Если сайт запрещает встраивание, игру можно открыть отдельно.</p>
+        <div id="games-list" class="games-list"></div>
       </section>
     </main>
   </div>
   <section class="auth-screen" id="auth-screen"><div class="auth-card">
-    <a class="brand-wrap auth-brand" href="#" aria-label="txtNote by Barsik"><span class="brand-icon" aria-hidden="true"></span><span><span class="eyebrow">Заметки и игры</span><strong class="brand-name">txtNote by Barsik</strong></span></a>
+    <a class="brand-wrap auth-brand" href="#" aria-label="Note by Barsik"><span class="brand-icon" aria-hidden="true"></span><span><span class="eyebrow">Заметки и игры</span><strong class="brand-name">Note by Barsik</strong></span></a>
     <h1 id="auth-heading">С возвращением</h1><p class="auth-copy">Войдите, чтобы продолжить работу со своими заметками.</p>
     <div class="auth-tabs" role="tablist"><button class="auth-tab active" id="login-tab" type="button" role="tab" aria-selected="true">Вход</button><button class="auth-tab" id="register-tab" type="button" role="tab" aria-selected="false">Регистрация</button></div>
-    <form id="auth-form"><label class="field register-only" id="name-field" hidden><span>Ваше имя</span><input id="auth-name" type="text" autocomplete="name" maxlength="40" placeholder="Как к вам обращаться?" /></label><label class="field"><span>Email</span><input id="auth-email" type="email" autocomplete="email" placeholder="you@example.com" required /></label><label class="field"><span>Пароль</span><input id="auth-password" type="password" autocomplete="current-password" minlength="8" placeholder="Не менее 8 символов" required /></label><p class="auth-error" id="auth-error" role="alert" aria-live="polite"></p><button class="primary-btn auth-submit" id="auth-submit" type="submit">Войти</button></form>
+    <form id="auth-form">
+      <label class="field register-only" id="name-field" hidden><span>Ваше имя</span><input id="auth-name" type="text" autocomplete="name" maxlength="40" placeholder="Как к вам обращаться?" /></label>
+      <label class="field"><span>Email</span><input id="auth-email" type="email" autocomplete="email" placeholder="you@example.com" required /></label>
+      <label class="field"><span>Пароль</span><input id="auth-password" type="password" autocomplete="current-password" minlength="8" placeholder="Не менее 8 символов" required /></label>
+      <p class="auth-error" id="auth-error" role="alert" aria-live="polite"></p>
+      <button class="primary-btn auth-submit" id="auth-submit" type="submit">Войти</button>
+    </form>
     <p class="helper-text auth-notice">Демо-аккаунт и данные хранятся только в этом браузере. Для синхронизации между устройствами нужен сервер.</p>
   </div></section>
-  <div class="modal hidden" id="note-modal" aria-hidden="true"><div class="modal-backdrop" data-close="true"></div><div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="modal-header"><div><p class="eyebrow">Редактор</p><h2 id="modal-title">Новая заметка</h2></div><button class="icon-btn" id="close-modal-btn" type="button" aria-label="Закрыть">✕</button></div><form id="note-form"><input type="hidden" id="note-id" /><label class="field"><span>Заголовок</span><input id="note-title" type="text" maxlength="80" placeholder="Например: План на неделю" required /></label><label class="field"><span>Категория</span><select id="note-category"><option value="work">Работа</option><option value="personal">Личное</option><option value="ideas">Идеи</option><option value="general">Общее</option></select></label><label class="field"><span>Текст заметки</span><textarea id="note-content" rows="7" maxlength="1000" placeholder="Что вы хотите запомнить?" required></textarea></label><div class="modal-actions"><label class="checkbox-wrap"><input id="note-pinned" type="checkbox" /><span>Добавить в избранное</span></label><div class="action-buttons"><button class="ghost-btn" type="button" id="cancel-btn">Отмена</button><button class="primary-btn" type="submit">Сохранить</button></div></div></form></div></div>
+  <div class="modal hidden" id="note-modal" aria-hidden="true">
+    <div class="modal-backdrop" data-close="true"></div>
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-header"><div><p class="eyebrow">Редактор</p><h2 id="modal-title">Новая заметка</h2></div><button class="icon-btn" id="close-modal-btn" type="button" aria-label="Закрыть">✕</button></div>
+      <form id="note-form">
+        <input type="hidden" id="note-id" />
+        <label class="field"><span>Заголовок</span><input id="note-title" type="text" maxlength="80" placeholder="Например: План на неделю" required /></label>
+        <label class="field"><span>Категория</span><select id="note-category"><option value="work">Работа</option><option value="personal">Личное</option><option value="ideas">Идеи</option><option value="general">Общее</option></select></label>
+        <label class="field"><span>Текст заметки</span><textarea id="note-content" rows="7" maxlength="1000" placeholder="Что вы хотите запомнить?" required></textarea></label>
+        <div class="modal-actions"><label class="checkbox-wrap"><input id="note-pinned" type="checkbox" /><span>Добавить в избранное</span></label><div class="action-buttons"><button class="ghost-btn" type="button" id="cancel-btn">Отмена</button><button class="primary-btn" type="submit">Сохранить</button></div></div>
+      </form>
+    </div>
+  </div>
   <template id="note-card-template"><article class="note-card"><div class="note-topline"><span class="note-tag"></span><button class="tiny-btn pin-btn" type="button" aria-label="Закрепить заметку">📌</button></div><h3 class="note-title"></h3><p class="note-preview"></p><div class="note-footer"><time class="note-date"></time><div class="note-actions"><button class="tiny-btn edit-btn" type="button" aria-label="Редактировать">✎</button><button class="tiny-btn delete-btn" type="button" aria-label="Удалить">🗑</button></div></div></article></template>
-  <script src="script.js?v=4"></script>
-  <script src="game-preview.js?v=1"></script>
+  <script src="script.js?v=5"></script>
+  <script src="game-preview.js?v=2"></script>
 </body>
 </html>
