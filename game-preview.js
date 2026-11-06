@@ -4,26 +4,26 @@
   const BRAND_NAME = 'Note by Barsik';
   const list = document.getElementById('games-list');
 
-  function applyBrandName() {
-    document.title = `${BRAND_NAME} — заметки и мини-игры`;
-    document.querySelectorAll('.brand-name').forEach((element) => {
-      element.textContent = BRAND_NAME;
-    });
-    document.querySelectorAll('.brand-wrap[aria-label]').forEach((element) => {
-      element.setAttribute('aria-label', BRAND_NAME);
-    });
-  }
+  // Set the brand once. Rewriting text from within a body-wide MutationObserver
+  // caused a mutation loop that could freeze the page.
+  document.title = `${BRAND_NAME} — заметки и мини-игры`;
+  document.querySelectorAll('.brand-name').forEach((element) => {
+    if (element.textContent !== BRAND_NAME) element.textContent = BRAND_NAME;
+  });
+  document.querySelectorAll('.brand-wrap[aria-label]').forEach((element) => {
+    if (element.getAttribute('aria-label') !== BRAND_NAME) element.setAttribute('aria-label', BRAND_NAME);
+  });
+
+  if (!list) return;
 
   function replaceGameFrames() {
-    if (!list) return;
-    list.querySelectorAll('.game-card').forEach((card) => {
-      const frame = card.querySelector('iframe');
-      if (!frame) return;
+    list.querySelectorAll('.game-card iframe').forEach((frame) => {
       let frameUrl;
       try { frameUrl = new URL(frame.src).href; } catch { return; }
       if (frameUrl !== GAME_URL) return;
 
-      const title = card.querySelector('.game-heading h3')?.textContent || 'Моя мини-игра';
+      const card = frame.closest('.game-card');
+      const title = card?.querySelector('.game-heading h3')?.textContent || 'Моя мини-игра';
       const image = document.createElement('img');
       image.className = 'game-preview-image';
       image.src = IMAGE_URL;
@@ -34,17 +34,14 @@
       image.decoding = 'async';
       frame.replaceWith(image);
 
-      // Retain only the designated standalone game link.
-      card.querySelectorAll('a').forEach((link) => {
+      // Keep only the existing “Открыть игру отдельно” link on this card.
+      card?.querySelectorAll('a').forEach((link) => {
         if (!link.classList.contains('game-open-link')) link.remove();
       });
     });
   }
 
-  applyBrandName();
   replaceGameFrames();
-  new MutationObserver(() => {
-    applyBrandName();
-    replaceGameFrames();
-  }).observe(document.body, { childList: true, subtree: true });
+  // Observe only game cards as they are rendered; don't watch the whole body.
+  new MutationObserver(replaceGameFrames).observe(list, { childList: true, subtree: true });
 })();
