@@ -32,7 +32,7 @@
           <div><p class="eyebrow">Планируйте мысли</p><h2 id="page-title">Заметки</h2></div>
           <div class="topbar-right">
             <label class="search-box" id="search-wrap" aria-label="Поиск заметок"><span>⌕</span><input id="search-input" type="search" placeholder="Поиск заметок..." /></label>
-            <div class="account-chip"><span class="avatar" id="user-avatar">U</span><span id="user-label">Пользователь</span><button class="ghost-btn logout-btn" id="logout-btn" type="button">Выйти</button></div>
+            <div class="account-chip" aria-label="Текущий аккаунт"><span class="avatar" id="user-avatar">U</span><span id="user-label">Пользователь</span><button class="ghost-btn logout-btn" id="logout-btn" type="button">Выйти</button></div>
           </div>
         </header>
 
@@ -93,5 +93,6 @@
 
     <template id="note-card-template"><article class="note-card"><div class="note-topline"><span class="note-tag"></span><button class="tiny-btn pin-btn" aria-label="Закрепить заметку">📌</button></div><h4 class="note-title"></h4><p class="note-preview"></p><div class="note-footer"><span class="note-date"></span><div class="note-actions"><button class="tiny-btn edit-btn" aria-label="Редактировать">✎</button><button class="tiny-btn delete-btn" aria-label="Удалить">🗑</button></div></div></article></template>
     <script src="script.js"></script>
+    <script src="account-display.js"></script>
   </body>
 </html>
