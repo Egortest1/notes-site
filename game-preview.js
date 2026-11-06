@@ -1,14 +1,24 @@
 (() => {
   const GAME_URL = 'https://lovable.dev/preview/Hgh5eKFZwTwWUcO2JuRNE6AsY0wwPxXq';
   const IMAGE_URL = 'assets/my-game-preview.svg';
+  const BRAND_NAME = 'Note by Barsik';
   const list = document.getElementById('games-list');
-  if (!list) return;
 
-  function renderStaticPreviews() {
+  function applyBrandName() {
+    document.title = `${BRAND_NAME} — заметки и мини-игры`;
+    document.querySelectorAll('.brand-name').forEach((element) => {
+      element.textContent = BRAND_NAME;
+    });
+    document.querySelectorAll('.brand-wrap[aria-label]').forEach((element) => {
+      element.setAttribute('aria-label', BRAND_NAME);
+    });
+  }
+
+  function replaceGameFrames() {
+    if (!list) return;
     list.querySelectorAll('.game-card').forEach((card) => {
       const frame = card.querySelector('iframe');
       if (!frame) return;
-
       let frameUrl;
       try { frameUrl = new URL(frame.src).href; } catch { return; }
       if (frameUrl !== GAME_URL) return;
@@ -24,13 +34,17 @@
       image.decoding = 'async';
       frame.replaceWith(image);
 
-      // Keep exactly one game link: the existing “Открыть игру отдельно” action.
+      // Retain only the designated standalone game link.
       card.querySelectorAll('a').forEach((link) => {
         if (!link.classList.contains('game-open-link')) link.remove();
       });
     });
   }
 
-  renderStaticPreviews();
-  new MutationObserver(renderStaticPreviews).observe(list, { childList: true, subtree: true });
+  applyBrandName();
+  replaceGameFrames();
+  new MutationObserver(() => {
+    applyBrandName();
+    replaceGameFrames();
+  }).observe(document.body, { childList: true, subtree: true });
 })();

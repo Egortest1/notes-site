@@ -1,0 +1,18 @@
+/* Monochrome cat silhouette brand mark */
+.brand-icon {
+  position: relative;
+  overflow: hidden;
+  background: #fff !important;
+  color: #111 !important;
+  border: 1px solid rgba(32, 34, 54, .12);
+  box-shadow: 0 8px 18px rgba(20, 22, 38, .12) !important;
+}
+.brand-icon::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  background-color: #111;
+  -webkit-mask: url("assets/cat-silhouette.svg") center / contain no-repeat;
+  mask: url("assets/cat-silhouette.svg") center / contain no-repeat;
+}
+.brand-name { letter-spacing: -.025em; }
