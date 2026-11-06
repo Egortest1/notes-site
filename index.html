@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css?v=5" />
-  <link rel="stylesheet" href="game-preview.css?v=1" />
+  <link rel="stylesheet" href="game-preview.css?v=2" />
 </head>
 <body>
   <div class="app-shell" id="app-shell" hidden>
@@ -58,5 +58,6 @@
   <div class="modal hidden" id="note-modal" aria-hidden="true"><div class="modal-backdrop" data-close="true"></div><div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="modal-header"><div><p class="eyebrow">Редактор</p><h2 id="modal-title">Новая заметка</h2></div><button class="icon-btn" id="close-modal-btn" type="button" aria-label="Закрыть">✕</button></div><form id="note-form"><input type="hidden" id="note-id" /><label class="field"><span>Заголовок</span><input id="note-title" type="text" maxlength="80" placeholder="Например: План на неделю" required /></label><label class="field"><span>Категория</span><select id="note-category"><option value="work">Работа</option><option value="personal">Личное</option><option value="ideas">Идеи</option><option value="general">Общее</option></select></label><label class="field"><span>Текст заметки</span><textarea id="note-content" rows="7" maxlength="1000" placeholder="Что вы хотите запомнить?" required></textarea></label><div class="modal-actions"><label class="checkbox-wrap"><input id="note-pinned" type="checkbox" /><span>Добавить в избранное</span></label><div class="action-buttons"><button class="ghost-btn" type="button" id="cancel-btn">Отмена</button><button class="primary-btn" type="submit">Сохранить</button></div></div></form></div></div>
   <template id="note-card-template"><article class="note-card"><div class="note-topline"><span class="note-tag"></span><button class="tiny-btn pin-btn" type="button" aria-label="Закрепить заметку">📌</button></div><h3 class="note-title"></h3><p class="note-preview"></p><div class="note-footer"><time class="note-date"></time><div class="note-actions"><button class="tiny-btn edit-btn" type="button" aria-label="Редактировать">✎</button><button class="tiny-btn delete-btn" type="button" aria-label="Удалить">🗑</button></div></div></article></template>
   <script src="script.js?v=4"></script>
+  <script src="game-preview.js?v=1"></script>
 </body>
 </html>
