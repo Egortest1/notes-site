@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="765" height="184" viewBox="0 0 765 184" role="img" aria-labelledby="title desc">
+  <title id="title">Начальный экран мини-игры</title>
+  <desc id="desc">Серый силуэт города, автомобиль на дороге и подсказка нажать пробел или коснуться экрана.</desc>
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#f7f7f7"/><stop offset="1" stop-color="#dedede"/></linearGradient>
+    <linearGradient id="road" x2="0" y2="1"><stop stop-color="#4b4b4b"/><stop offset="1" stop-color="#292929"/></linearGradient>
+    <filter id="soft"><feGaussianBlur stdDeviation=".45"/></filter>
+  </defs>
+  <rect width="765" height="184" fill="url(#sky)"/>
+  <g fill="#d0d0d0">
+    <path d="M0 61h27v34h16v-19h32V63h8V18h29v61h16V49h31v43h17V37h22V12h10v25h13v55h18V39h13v19h22V30h28v48h14V57h17v35h17V64h23v-9h18v37h15V39h10V22h29v75h20V57h22V38h26v48h17V17h30v74h14V61h28V43h22v48h17V30h27v64h22V57h26v37h18V42h31v51h20V64h21v30h15V53h31v45h14v-28h29v34H0z"/>
+  </g>
+  <g fill="#a9a9a9">
+    <path d="M0 91h51V76h24V62h22v23h16V58l17 26 15-17 16 15v20h20V81h22V39q0-12 13-14 13 2 13 14v56h17V72l29 18V47h29v45h16l8-26 13 25V59h21v37h20V75l20-15 17 18v20h20V54q0-12 10-12t10 12v41h22V78h21V46h20v48h20V66l18 13 15-13 18 17v15h27V61h26v37h21V71h18v31H0z"/>
+  </g>
+  <g fill="#777">
+    <path d="M0 108h22V81h21v25h16V70h20v38h13V96h18V82l17-28 17 28v30h16V91h17v28h15V79h19v41h12V96h19v35h18V73h18v47h14V87h20v39h14V99h19v39h17V89h20v39h18V78h21v48h15V91h22v42h17V74h18v57h15v-25h20v36h20V83h20v47h18V91h18v33h17V77h21v47h19V91h17v47h20V76h21v58h13V96h19v42h18V86h20v52h20v-30h20v30h14v-29h20v38H0z"/>
+  </g>
+  <g fill="#555">
+    <path d="M0 133h25v-20h19v28h17v-34h23v36h15v-21h17v25h18v-39h21v39h17v-22h17v31h17v-43h22v43h15v-28h20v32h16v-48h20v48h16v-25h19v32h18v-42h22v42h15v-31h20v35h15v-48h22v48h19v-28h19v34h16v-42h22v42h18v-29h18v34h18v-45h23v45h19v-27h19v33h18v-42h20v42h18v-31h22v34h19v-25h20v27h19v-44h22v44h15v-28h21v33h18v-43h20v43h13v-29h19v35H0z"/>
+  </g>
+  <rect y="148" width="765" height="36" fill="url(#road)"/>
+  <path d="M0 150h765v4H0z" fill="#373737"/>
+  <g opacity=".4" fill="#f2f2f2"><path d="M219 166h47v2h-47zm304 0h46v2h-46z"/></g>
+  <g transform="translate(32 147)" filter="url(#soft)">
+    <ellipse cx="49" cy="30" rx="49" ry="5" fill="#171717" opacity=".55"/>
+    <path d="M4 20 9 10q2-4 9-5l14-3q10-2 17 4l12 9 12 2q8 2 10 8l-1 5H3l-1-5q0-4 2-5z" fill="#15191b" stroke="#292d30" stroke-width="2"/>
+    <path d="m18 8 15-3q8-1 13 4l8 7H13z" fill="#5b666b" stroke="#869195" stroke-width="1"/>
+    <path d="m35 6-1 10m13-5 5 5" fill="none" stroke="#22282a" stroke-width="2"/>
+    <path d="M4 21h7v4H3zm64-3 10 2 2 5h-9z" fill="#e6473d"/>
+    <circle cx="19" cy="27" r="8" fill="#101112"/><circle cx="19" cy="27" r="4" fill="#8b8b8b"/><circle cx="65" cy="27" r="8" fill="#101112"/><circle cx="65" cy="27" r="4" fill="#8b8b8b"/>
+    <path d="M8 16h6m54 2h7" stroke="#ece7d0" stroke-width="2"/>
+  </g>
+  <text x="382.5" y="111" text-anchor="middle" fill="#54769a" font-family="Arial,sans-serif" font-size="13" letter-spacing=".7" opacity=".88">Нажмите пробел или коснитесь экрана, чтобы начать</text>
+</svg>
